@@ -1,33 +1,31 @@
 package ru.autotests.testPlatform.customdriver;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import ru.autotests.testPlatform.WebDriver;
+import ru.autotests.testPlatform.CustomWebDriver;
 
-public class CustomChromeDriver extends WebDriver {
+public class CustomChromeDriver extends CustomWebDriver {
 
-    private static CustomChromeDriver myChromeDriver;
+    private static CustomChromeDriver customChromeDriver;
     private ChromeDriver driver;
 
     private CustomChromeDriver() {
+        getLogger().info("Инициализирую Chrome Driver");
         System.setProperty("webdriver.chrome.driver", "bin/chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, timeOutInSeconds, sleepInMillis);
-
     }
 
-    public static CustomChromeDriver getInstance(){
-        if (myChromeDriver == null) myChromeDriver = new CustomChromeDriver();
-        return myChromeDriver;
+    public static CustomChromeDriver getInstance() {
+        if (customChromeDriver == null) customChromeDriver = new CustomChromeDriver();
+        return customChromeDriver;
     }
 
     @Override
-    public void get(String url) {
-        super.get(url);
-        driver.get(url);
+    public WebDriver getWebDriver() {
+        return driver;
     }
 }

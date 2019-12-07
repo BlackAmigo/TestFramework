@@ -2,11 +2,9 @@ package ru.autotests.yandex;
 
 
 import ru.autotests.testPlatform.BasePage;
-import ru.autotests.testPlatform.WebDriver;
 import ru.autotests.testPlatform.WebDriverManager;
 
-import static ru.autotests.testPlatform.WebDriverManager.DriverType.CHROME;
-
+import static ru.autotests.testPlatform.WebDriverManager.DriverType.FIREFOX;
 
 public class GeneralPage extends BasePage {
 
@@ -16,8 +14,9 @@ public class GeneralPage extends BasePage {
     }
 
     public static void main(String[] args) {
-        WebDriverManager.setDriver(CHROME);
 
+        WebDriverManager.setupWebDriver(FIREFOX, 22,600);
         new GeneralPage().open();
+
     }
 }
