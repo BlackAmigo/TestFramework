@@ -12,22 +12,22 @@ public final class MainPage extends BasePage {
     }
 
     public void clickSearchField(String query) {
-        logger.info("Открываю поле поиска");
         String searchFieldPath = "//input[@aria-label='Запрос']";
         driver.findElementByXPath(searchFieldPath).click();
+        logger.info("Кликаю по полю поиска");
     }
 
     public void setSearchField(String query) {
-        logger.info("Пишу запрос в поле поиска: " + query);
         String searchFieldPath = "//input[@aria-label='Запрос']";
         WebElement searchField = driver.findElementByXPath(searchFieldPath);
+        logger.info(String.format("Пишу запрос в поле поиска: '%s'", query));
         searchField.sendKeys(query);
     }
 
     public void clickSearchButton() {
-        logger.info("Кликаю по кнопке Найти");
         String searchButtonPath = "//button[@type='submit']";
         driver.findElementByXPath(searchButtonPath).click();
+        logger.info("Кликаю по кнопке Найти");
     }
 
     public void findPageInResponse(String page, int countPage) {
@@ -44,7 +44,14 @@ public final class MainPage extends BasePage {
             }
         }
         logger.info("Колличество переходов - " + currentCount);
-        if (element != null) element.click();
-        else throw new NullPointerException(String.format("Страница %s не найдена", page));
+        if (element != null) {
+            element.click();
+            logger.info(String.format("Страница %s найдена", page));
+        }
+        else throw new NullPointerException(String.format("Страница %s НЕ найдена!", page));
+    }
+
+    public void closeAllWindows(){
+        driver.closeAllWindows();
     }
 }
