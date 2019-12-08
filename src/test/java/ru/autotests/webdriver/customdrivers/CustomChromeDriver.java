@@ -1,9 +1,9 @@
-package ru.autotests.testPlatform.customdriver;
+package ru.autotests.webdriver.customdrivers;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import ru.autotests.testPlatform.CustomWebDriver;
+import ru.autotests.webdriver.CustomWebDriver;
 
 public class CustomChromeDriver extends CustomWebDriver {
 

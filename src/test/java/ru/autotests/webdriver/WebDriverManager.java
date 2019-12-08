@@ -1,7 +1,7 @@
-package ru.autotests.testPlatform;
+package ru.autotests.webdriver;
 
-import ru.autotests.testPlatform.customdriver.CustomChromeDriver;
-import ru.autotests.testPlatform.customdriver.CustomFirefoxDriver;
+import ru.autotests.webdriver.customdrivers.CustomChromeDriver;
+import ru.autotests.webdriver.customdrivers.CustomFirefoxDriver;
 
 public  class WebDriverManager {
 

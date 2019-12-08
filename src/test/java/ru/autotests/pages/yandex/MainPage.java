@@ -1,33 +1,33 @@
-package ru.autotests.yandex;
+package ru.autotests.pages.yandex;
 
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import ru.autotests.BasePage;
+import ru.autotests.pages.BasePage;
 
 public final class MainPage extends BasePage {
 
     public void open() {
         String yandexPage = "https://yandex.ru/";
-        webDriver.get(yandexPage);
+        driver.get(yandexPage);
     }
 
     public void clickSearchField(String query) {
-        log("Открываю поле поиска");
+        logger.info("Открываю поле поиска");
         String searchFieldPath = "//input[@aria-label='Запрос']";
-        webDriver.findElementByXPath(searchFieldPath).click();
+        driver.findElementByXPath(searchFieldPath).click();
     }
 
     public void setSearchField(String query) {
-        log("Пишу запрос в поле поиска: " + query);
+        logger.info("Пишу запрос в поле поиска: " + query);
         String searchFieldPath = "//input[@aria-label='Запрос']";
-        WebElement searchField = webDriver.findElementByXPath(searchFieldPath);
+        WebElement searchField = driver.findElementByXPath(searchFieldPath);
         searchField.sendKeys(query);
     }
 
     public void clickSearchButton() {
-        log("Кликаю по кнопке Найти");
+        logger.info("Кликаю по кнопке Найти");
         String searchButtonPath = "//button[@type='submit']";
-        webDriver.findElementByXPath(searchButtonPath).click();
+        driver.findElementByXPath(searchButtonPath).click();
     }
 
     public void findPageInResponse(String page, int countPage) {
@@ -36,16 +36,15 @@ public final class MainPage extends BasePage {
         for (int i = 0; i < countPage; i++) {
             try {
                 currentCount = i;
-                element = webDriver.findByPartialLinkText(page);
+                element = driver.findByPartialLinkText(page);
                 break;
             } catch (TimeoutException te) {
                 String nextButton = "//a[text() = 'дальше']";
-                webDriver.findElementByXPath(nextButton).click();
+                driver.findElementByXPath(nextButton).click();
             }
         }
-        log("Колличество переходов - " + currentCount);
+        logger.info("Колличество переходов - " + currentCount);
         if (element != null) element.click();
         else throw new NullPointerException(String.format("Страница %s не найдена", page));
     }
-
 }

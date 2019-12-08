@@ -1,10 +1,10 @@
-package ru.autotests.yandex;
+package ru.autotests.pages.yandex;
 
 
-import ru.autotests.testPlatform.BasePage;
-import ru.autotests.testPlatform.WebDriverManager;
+import ru.autotests.pages.BasePage;
+import ru.autotests.webdriver.WebDriverManager;
 
-import static ru.autotests.testPlatform.WebDriverManager.DriverType.FIREFOX;
+import static ru.autotests.webdriver.WebDriverManager.DriverType.FIREFOX;
 
 public class GeneralPage extends BasePage {
 
