@@ -1,4 +1,4 @@
-package ru.autotests.cucumber.steps;
+package ru.autotests.cucumber.yandex.steps;
 
 import cucumber.api.java.ru.Допустим;
 import cucumber.api.java.ru.Если;

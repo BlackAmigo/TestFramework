@@ -44,7 +44,7 @@ public class MailTest {
 
     @BeforeClass
     public void setUp() {
-        WebDriverManager.setupWebDriver(CHROME, 10, 2000);
+        WebDriverManager.setupWebDriver(CHROME);
         startPage = new StartPage();
         mainPage = new MainPage();
         sendMailForm = new SendMailForm();

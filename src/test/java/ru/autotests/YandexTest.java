@@ -9,7 +9,7 @@ import ru.autotests.webdriver.WebDriverManager;
 import static ru.autotests.webdriver.WebDriverManager.DriverType.CHROME;
 import static ru.autotests.webdriver.WebDriverManager.DriverType.FIREFOX;
 
-public class TestSuit {
+public class YandexTest {
     private MainPage mainPage;
 
     @BeforeClass

@@ -8,7 +8,7 @@ public final class MainPage extends BasePage {
 
     public void open() {
         String yandexPage = "https://yandex.ru/";
-        driver.get(yandexPage);
+        open(yandexPage);
     }
 
     public void clickSearchField(String query) {
@@ -49,9 +49,5 @@ public final class MainPage extends BasePage {
             logger.info(String.format("Страница %s найдена", page));
         }
         else throw new NullPointerException(String.format("Страница %s НЕ найдена!", page));
-    }
-
-    public void closeAllWindows(){
-        driver.closeAllWindows();
     }
 }
