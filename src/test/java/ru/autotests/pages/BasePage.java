@@ -9,4 +9,12 @@ public abstract class BasePage {
     protected CustomWebDriver driver = WebDriverManager.getWebDriver();
     protected Logger logger = CustomWebDriver.getLogger();
 
+    public void open(String url) {
+        driver.get(url);
+    }
+
+    public void closeAllWindows() {
+        driver.closeAllWindows();
+    }
+
 }

@@ -7,6 +7,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -55,7 +56,7 @@ public abstract class CustomWebDriver {
             // текущий дескриптор
             String oldDescriptor = getWebDriver().getWindowHandle();
             Set<String> windowsList = getWebDriver().getWindowHandles();
-            for (String windowHandle : windowsList){
+            for (String windowHandle : windowsList) {
                 // меняем дескриптор
                 getWebDriver().switchTo().window(windowHandle);
                 String newDescriptor = getWebDriver().getWindowHandle();
@@ -66,7 +67,7 @@ public abstract class CustomWebDriver {
                     break;
                 }
             }
-            if(getWebDriver().getCurrentUrl().equals(newUrl))
+            if (getWebDriver().getCurrentUrl().equals(newUrl))
                 logger.trace(String.format("Фокус драйвера изменился на '%s'", newUrl));
             else {
                 logger.trace("Фокус драйвера НЕ изменился!");
@@ -100,7 +101,7 @@ public abstract class CustomWebDriver {
         return element;
     }
 
-    private void createScreenshot(){
+    private void createScreenshot() {
         logger.trace("Создаю скриншот ошибки");
         File file = ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.FILE);
         try {
