@@ -17,11 +17,11 @@ import java.util.Properties;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static ru.autotests.webdriver.WebDriverManager.DriverType.CHROME;
+import static ru.autotests.webdriver.WebDriverManager.DriverType.FIREFOX;
 
 public class StepDefinition {
 
     private Properties properties;
-
     {
         properties = new Properties();
         try {
@@ -31,26 +31,31 @@ public class StepDefinition {
         }
     }
 
-    private static StartPage startPage;
-    private static MainPage mainPage;
-    private static SendMailForm sendMailForm;
+    private StartPage startPage;
+    private MainPage mainPage;
+    private SendMailForm sendMailForm;
+    private String login;
+    private String domain;
+    private String password;
+    private String recipientMailAddress;
+    private String letterSubject;
+    private String letterText;
+    private String letterId;
 
-    static {
+    {
         WebDriverManager.setupWebDriver(CHROME);
         startPage = new StartPage();
         mainPage = new MainPage();
         sendMailForm = new SendMailForm();
+
+        login = properties.getProperty("mailru.login");
+        domain = properties.getProperty("mailru.domain.mail");
+        password = properties.getProperty("mailru.password");
+
+        recipientMailAddress = login + domain;
+        letterSubject = "Тема письма";
+        letterText = "Не первое письмо!";
     }
-
-    private String login = properties.getProperty("mailru.login");
-    private String domain = properties.getProperty("mailru.domain.mail");
-    private String password = properties.getProperty("mailru.password");
-
-    private String recipientMailAddress = login + domain;
-    private String letterSubject = "Тема письма";
-    private String letterText = "Не первое письмо!";
-
-    private String letterId;
 
     @Допустим("^, что открыта страница https://mail\\.ru$")
     public void чтоОткрытаСтраницаHttpsMailRu() {
@@ -142,5 +147,6 @@ public class StepDefinition {
     public void появилосьСообщениеВойтиВАккаунт() {
         String loginHeaderText = mainPage.getLoginHeaderText();
         assertEquals(loginHeaderText, "Войти в аккаунт");
+        mainPage.closeAllWindows();
     }
 }
