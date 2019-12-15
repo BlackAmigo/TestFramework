@@ -1,5 +1,6 @@
 # language: ru
 
+    @yandexru
     Функционал: Поиск сайта https://www.performance-lab.ru в поисковой системе https://yandex.ru/
 
     @success

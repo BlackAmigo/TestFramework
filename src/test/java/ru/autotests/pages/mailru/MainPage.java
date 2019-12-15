@@ -6,17 +6,14 @@ import ru.autotests.pages.BasePage;
 
 public class MainPage extends BasePage {
 
-    private String writeLetterButtonPath = "//span[@title='Написать письмо']";
-    private String sentMessageFolderPath = "//div[text() = 'Отправленные']";
-
     public void clickWriteLetterButton() {
         logger.info("Кликаю по кнопке 'Написать письмо'");
-        driver.findElementByXPath(writeLetterButtonPath).click();
+        driver.findElementByXPath("//span[@title='Написать письмо']").click();
     }
 
     public void clickSentMessageFolder() {
         logger.info("Кликаю по папке 'Отправленные'");
-        driver.findElementByXPath(sentMessageFolderPath).click();
+        driver.findElementByXPath("//div[text() = 'Отправленные']").click();
     }
 
     /**

@@ -7,9 +7,9 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/java/ru/autotests/cucumber/features",
-        glue = "ru/autotests/cucumber/yandex/steps",
-//        tags = "@withdrawal",
+        features = "src/test/java/ru/autotests/cucumber",
+        glue = "ru/autotests/cucumber",
+        tags = "@mailru",
 //        dryRun = false,
 //        strict = false,
         snippets = SnippetType.CAMELCASE
