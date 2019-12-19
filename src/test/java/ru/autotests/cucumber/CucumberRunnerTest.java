@@ -5,9 +5,10 @@ import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
+
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/java/ru/autotests/cucumber",
+        features = "src/test/java/ru/autotests/cucumber/features",
         glue = "ru/autotests/cucumber",
         tags = "@mailru",
 //        dryRun = false,

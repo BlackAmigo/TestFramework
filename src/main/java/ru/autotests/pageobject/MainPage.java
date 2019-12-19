@@ -1,8 +1,7 @@
-package ru.autotests.pages.mailru;
+package ru.autotests.pageobject;
 
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
-import ru.autotests.pages.BasePage;
 
 public class MainPage extends BasePage {
 

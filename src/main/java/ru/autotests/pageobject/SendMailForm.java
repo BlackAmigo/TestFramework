@@ -1,4 +1,4 @@
-package ru.autotests.pages.mailru;
+package ru.autotests.pageobject;
 
 import org.openqa.selenium.WebElement;
 

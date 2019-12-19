@@ -1,12 +1,12 @@
-package ru.autotests.cucumber.mailru.steps;
+package ru.autotests.cucumber;
 
 import cucumber.api.java.ru.Допустим;
 import cucumber.api.java.ru.Если;
 import cucumber.api.java.ru.То;
 import cucumber.api.java.ru.Тогда;
-import ru.autotests.pages.mailru.MainPage;
-import ru.autotests.pages.mailru.SendMailForm;
-import ru.autotests.pages.mailru.StartPage;
+import ru.autotests.pageobject.MainPage;
+import ru.autotests.pageobject.SendMailForm;
+import ru.autotests.pageobject.StartPage;
 import ru.autotests.webdriver.WebDriverManager;
 
 import java.io.File;
@@ -17,7 +17,6 @@ import java.util.Properties;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static ru.autotests.webdriver.WebDriverManager.DriverType.CHROME;
-import static ru.autotests.webdriver.WebDriverManager.DriverType.FIREFOX;
 
 public class StepDefinition {
 
@@ -25,7 +24,7 @@ public class StepDefinition {
     {
         properties = new Properties();
         try {
-            properties.load(new FileReader(new File("src/test/resources/config.properties")));
+            properties.load(new FileReader(new File("src/main/resources/config.properties")));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,4 +1,4 @@
-package ru.autotests.pages;
+package ru.autotests.pageobject;
 
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
