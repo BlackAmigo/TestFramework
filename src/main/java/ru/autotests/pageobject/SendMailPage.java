@@ -2,43 +2,48 @@ package ru.autotests.pageobject;
 
 import org.openqa.selenium.WebElement;
 
-public class SendMailForm extends MainPage {
+public class SendMailPage extends MainPage {
 
-    public void setMailAddress(String mailAddress) {
-        String mailAddressField = "//div[@class='input--3slxg']//input";
+    public SendMailPage setMailAddress(String mailAddress) {
+        String mailAddressField = "//*[@class='input--3slxg']//input";
         WebElement searchField = driver.findElementByXPath(mailAddressField);
         logger.info(String.format("Пишу адрес получателя письма: '%s'", mailAddress));
         searchField.sendKeys(mailAddress);
+        return this;
     }
 
-    public void setLetterSubjectField(String letterSubject) {
-        String letterSubjectField = "//div[@class='container--3QXHv']//input";
+    public SendMailPage setLetterSubjectField(String letterSubject) {
+        String letterSubjectField = "//*[@class='container--3QXHv']//input";
         WebElement searchField = driver.findElementByXPath(letterSubjectField);
         logger.info(String.format("Пишу тему письма: '%s'", letterSubject));
         searchField.sendKeys(letterSubject);
+        return this;
     }
 
-    public void setLetterText(String letterText) {
-        String letterTextAreaPath = "//div[contains(@class, 'editable-container')]/div";
+    public SendMailPage setLetterText(String letterText) {
+        String letterTextAreaPath = "//*[contains(@class, 'editable-container')]/div/div";
         WebElement searchField = driver.findElementByXPath(letterTextAreaPath);
         logger.info(String.format("Пишу текст письма: '%s'", letterText));
         searchField.sendKeys(letterText);
+        return this;
     }
 
-    public void clickSendButton(){
+    public SendMailPage clickSendButton(){
         logger.info("Кликаю по кнопке 'Отправить'");
-        String sendButtonPath = "//span[@title='Отправить']";
+        String sendButtonPath = "//*[@title='Отправить']";
         driver.findElementByXPath(sendButtonPath).click();
+        return this;
     }
 
     public String getEmailSendingStatus() {
         logger.info("Получаю статус отправки письма");
-        return getText("//div[@class='layer__header']/span[text()='отправлено']");
+        return getText("//*[@class='layer__header']/span");
     }
 
-    public void clickCloseInfoButton(){
+    public SendMailPage clickCloseInfoButton(){
         logger.info("Закрываю окно 'Письмо отправлено'");
-        String closeButtonPath = "//div[@class='layer__controls']";
+        String closeButtonPath = "//*[@class='layer__controls']";
         driver.findElementByXPath(closeButtonPath).click();
+        return this;
     }
 }

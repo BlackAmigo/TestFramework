@@ -4,25 +4,29 @@ import org.openqa.selenium.WebElement;
 
 public class StartPage extends BasePage {
 
-    public void open() {
+    public StartPage open() {
         String mailruPage = "https://mail.ru/";
         open(mailruPage);
+        return this;
     }
 
-    public void setLoginField(String login) {
-        WebElement searchField = driver.findElementByXPath("//input[@id='mailbox:login']");
-        logger.info(String.format("Пишу запрос в поле логин: '%s'", login));
-        searchField.sendKeys(login);
+    public StartPage setLoginField(String login) {
+        WebElement loginField = driver.findElementByXPath("//*[@id='mailbox:login']");
+        logger.info(String.format("Ввожу логин: '%s'", login));
+        loginField.sendKeys(login);
+        return this;
     }
 
-    public void setPasswordField(String password) {
-        WebElement searchField = driver.findElementByXPath("//input[@id='mailbox:password']");
-        logger.info(String.format("Пишу запрос в поле пароль: '%s'", password));
-        searchField.sendKeys(password);
+    public StartPage setPasswordField(String password) {
+        WebElement passwordField = driver.findElementByXPath("//*[@id='mailbox:password']");
+        logger.info("Ввожу пароль");
+        passwordField.sendKeys(password);
+        return this;
     }
 
-    public void clickSubmitButton() {
-        driver.findElementByXPath("//label[@id='mailbox:submit']").click();
+    public StartPage clickSubmitButton() {
+        driver.findElementByXPath("//*[@id='mailbox:submit']").click();
         logger.info("Кликаю по кнопке");
+        return this;
     }
 }

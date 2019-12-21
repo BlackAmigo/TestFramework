@@ -39,6 +39,7 @@ public class WebDriverManager {
                 break;
         }
         customWebDriver.setWebDriverWait(TIME_OUT_IN_SECONDS, SLEEP_IN_MILLIS);
+        customWebDriver.setImplicitlyWait(TIME_OUT_IN_SECONDS);
     }
 
     public static void setupWebDriver(DriverType driverType, long timeOutInSeconds, long sleepInMillis) {

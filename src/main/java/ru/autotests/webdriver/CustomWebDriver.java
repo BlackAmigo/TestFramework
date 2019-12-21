@@ -12,7 +12,9 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public abstract class CustomWebDriver {
 
@@ -27,6 +29,10 @@ public abstract class CustomWebDriver {
 
     public void setWebDriverWait(long timeOutInSeconds, long sleepInMillis) {
         wait = new WebDriverWait(getWebDriver(), timeOutInSeconds, sleepInMillis);
+    }
+
+    public void setImplicitlyWait(long timeOutInSeconds) {
+        getWebDriver().manage().timeouts().implicitlyWait(timeOutInSeconds, TimeUnit.SECONDS);
     }
 
     public void get(String url) {
@@ -44,9 +50,9 @@ public abstract class CustomWebDriver {
         getWebDriver().quit();
     }
 
-    public void isElementPresent(String xpath) {
-        logger.trace(String.format("Проверяю наличие элемента '%s'", xpath));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
+    public WebElement waitForClickable(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        return element;
     }
 
     public void switchFocusToPage(String newUrl) {
@@ -78,6 +84,19 @@ public abstract class CustomWebDriver {
     public WebElement findByPartialLinkText(String linkText) {
         logger.trace(String.format("Ищу элемент по тексту ссылки '%s'", linkText));
         return wait.until(ExpectedConditions.presenceOfElementLocated(By.partialLinkText(linkText)));
+    }
+
+    public List<WebElement> findElementsByXPath(String xpath) {
+        logger.trace(String.format("Ищу список элементов по локатору '%s'", xpath));
+        List<WebElement> elements = null;
+        try {
+            elements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(xpath)));
+            elements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(xpath)));
+        } catch (Exception e) {
+            createScreenshot();
+            e.printStackTrace();
+        }
+        return elements;
     }
 
     public WebElement findElementByXPath(String xpath) {
