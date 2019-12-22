@@ -90,8 +90,7 @@ public abstract class CustomWebDriver {
         logger.trace(String.format("Ищу список элементов по локатору '%s'", xpath));
         List<WebElement> elements = null;
         try {
-            elements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(xpath)));
-            elements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(xpath)));
+            elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xpath)));
         } catch (Exception e) {
             createScreenshot();
             e.printStackTrace();
@@ -103,7 +102,6 @@ public abstract class CustomWebDriver {
         logger.trace(String.format("Ищу элемент по локатору '%s'", xpath));
         WebElement element = null;
         try {
-            element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
             element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
             element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
 
