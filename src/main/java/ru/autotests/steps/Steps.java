@@ -34,7 +34,7 @@ public class Steps {
         mainPage.clickWriteLetterButton();
         SendMailPage sendMailPage = BasePage.initPage(SendMailPage.class);
         return sendMailPage.setMailAddress(recipientMailAddress)
-                .setLetterSubjectField(letterSubject)
+                .setLetterSubject(letterSubject)
                 .setLetterText(letterText)
                 .clickSendButton();
     }

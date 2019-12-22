@@ -12,7 +12,7 @@ public class SendMailPage extends MainPage {
         return this;
     }
 
-    public SendMailPage setLetterSubjectField(String letterSubject) {
+    public SendMailPage setLetterSubject(String letterSubject) {
         String letterSubjectField = "//*[@class='container--3QXHv']//input";
         WebElement searchField = driver.findElementByXPath(letterSubjectField);
         logger.info(String.format("Пишу тему письма: '%s'", letterSubject));
