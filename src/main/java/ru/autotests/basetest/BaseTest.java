@@ -13,13 +13,10 @@ public class BaseTest {
 
     protected Steps steps;
 
-    public BaseTest() {
-        steps = new Steps();
-    }
-
     @BeforeSuite
     public void tearDown() {
         WebDriverManager.setupWebDriver(CHROME);
+        steps = new Steps();
     }
 
     @AfterSuite

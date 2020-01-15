@@ -1,5 +1,6 @@
 package ru.autotests;
 
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 import ru.autotests.basetest.BaseTest;
 
@@ -13,5 +14,10 @@ public class T0001_LogInMail extends BaseTest {
     public void logInMail() {
         steps.logIn();
         assertEquals(steps.getUserEmail(), getLogin() + getMailDomain());
+    }
+
+    @AfterTest
+    public void afterTest(){
+        steps.logOut();
     }
 }

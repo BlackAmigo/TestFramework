@@ -102,15 +102,16 @@ public abstract class CustomWebDriver {
         logger.trace(String.format("Ищу элемент по локатору '%s'", xpath));
         WebElement element = null;
         try {
+            element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
             element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-            element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
 
-//        ((JavascriptExecutor)driver).executeScript(
+//        ((JavascriptExecutor)getWebDriver()).executeScript(
 //                "arguments[0].scrollIntoView(true);",element);
 
             Actions scroll = new Actions(getWebDriver());
-            scroll.moveToElement(element);
+            scroll.moveToElement(element).build();
             scroll.perform();
+            element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
         } catch (Exception e) {
             createScreenshot();
             e.printStackTrace();

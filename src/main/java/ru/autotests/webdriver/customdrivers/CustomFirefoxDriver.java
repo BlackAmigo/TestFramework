@@ -1,5 +1,6 @@
 package ru.autotests.webdriver.customdrivers;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -14,9 +15,8 @@ public class CustomFirefoxDriver extends CustomWebDriver {
         getLogger().info("Инициализирую Firefox Driver");
         System.setProperty("webdriver.gecko.driver", "bin/geckodriver-v026.exe");
         FirefoxOptions options = new FirefoxOptions();
-
         driver = new FirefoxDriver(options);
-        driver.manage().window().maximize();
+        driver.manage().window().setSize(new Dimension(800, 600));
     }
 
     public static CustomFirefoxDriver getInstance() {
