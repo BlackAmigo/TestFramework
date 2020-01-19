@@ -1,8 +1,12 @@
 package ru.autotests.pageobject;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 
 public class StartPage extends BasePage {
+
+    private static Logger logger = LogManager.getLogger();
 
     public StartPage open() {
         String mailruPage = "https://mail.ru/";

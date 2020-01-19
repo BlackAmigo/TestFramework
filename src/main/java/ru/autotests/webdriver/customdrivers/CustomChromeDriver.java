@@ -1,5 +1,7 @@
 package ru.autotests.webdriver.customdrivers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,9 +12,10 @@ public class CustomChromeDriver extends CustomWebDriver {
 
     private static CustomChromeDriver customChromeDriver;
     private ChromeDriver driver;
+    private static Logger logger = LogManager.getLogger();
 
     private CustomChromeDriver() {
-        getLogger().info("Инициализирую Chrome Driver");
+        logger.info("Инициализирую Chrome Driver");
         System.setProperty("webdriver.chrome.driver", "bin/chromedriver");
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});

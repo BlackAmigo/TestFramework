@@ -1,5 +1,7 @@
 package ru.autotests.pageobject;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
@@ -8,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainPage extends BasePage {
+
+    private static Logger logger = LogManager.getLogger();
 
     public MainPage clickWriteLetterButton() {
         logger.info("Кликаю по кнопке 'Написать письмо'");
@@ -49,6 +53,13 @@ public class MainPage extends BasePage {
     public String getUserEmail() {
         logger.info("Получаю адрес почты текущего пользователя");
         String xPath = "//*[@id='PH_user-email']";
+        WebElement element = driver.findElementByXPath(xPath);
+        return element.getText();
+    }
+
+    public String getAuthLink() {
+        logger.info("Получаю текст элемента авторизации");
+        String xPath = "//*[@id='PH_authLink']";
         WebElement element = driver.findElementByXPath(xPath);
         return element.getText();
     }

@@ -42,6 +42,10 @@ public class Steps {
         return mainPage.getLoginHeaderText();
     }
 
+    public String getAuthLink() {
+        return mainPage.getAuthLink();
+    }
+
     public String getUserEmail() {
         return mainPage.getUserEmail();
     }
@@ -76,6 +80,7 @@ public class Steps {
     public String getLetterRecipient(WebElement letter) {
         return mainPage.getLetterRecipient(letter);
     }
+
     public String getLetterSubject(WebElement letter) {
         return mainPage.getLetterSubject(letter);
     }

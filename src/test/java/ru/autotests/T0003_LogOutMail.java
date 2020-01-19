@@ -15,7 +15,7 @@ public class T0003_LogOutMail extends BaseTest {
 
     @Test
     public void logOut(){
-        String loginHeaderText = steps.logOut().getLoginHeaderText();
-        assertEquals(loginHeaderText, "Войти в аккаунт");
+        String loginHeaderText = steps.logOut().getAuthLink();
+        assertEquals(loginHeaderText, "Вход");
     }
 }

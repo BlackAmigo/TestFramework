@@ -23,10 +23,6 @@ public abstract class CustomWebDriver {
 
     public abstract WebDriver getWebDriver();
 
-    public static Logger getLogger() {
-        return logger;
-    }
-
     public void setWebDriverWait(long timeOutInSeconds, long sleepInMillis) {
         wait = new WebDriverWait(getWebDriver(), timeOutInSeconds, sleepInMillis);
     }
@@ -123,8 +119,8 @@ public abstract class CustomWebDriver {
         logger.trace("Создаю скриншот ошибки");
         File file = ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.FILE);
         try {
-            String fileName = String
-                    .format("screenshots/%s-scr.jpg", new SimpleDateFormat("dd.MM_HH-mm-ss").format(new Date()));
+            String fileName = String.format("target/generated-test-sources/test-reports/screenshots/%s-scr.jpg",
+                    new SimpleDateFormat("dd.MM_HH-mm-ss").format(new Date()));
             FileUtils.copyFile(file, new File(fileName));
         } catch (IOException ex) {
             ex.printStackTrace();

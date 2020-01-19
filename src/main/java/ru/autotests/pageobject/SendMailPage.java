@@ -1,8 +1,12 @@
 package ru.autotests.pageobject;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 
 public class SendMailPage extends MainPage {
+
+    private static Logger logger = LogManager.getLogger();
 
     public SendMailPage setMailAddress(String mailAddress) {
         String mailAddressField = "//*[@class='input--3slxg']//input";

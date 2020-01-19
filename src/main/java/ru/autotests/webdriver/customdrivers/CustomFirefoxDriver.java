@@ -1,5 +1,7 @@
 package ru.autotests.webdriver.customdrivers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -10,9 +12,10 @@ public class CustomFirefoxDriver extends CustomWebDriver {
 
     private static CustomFirefoxDriver customFirefoxDriver;
     private FirefoxDriver driver;
+    private static Logger logger = LogManager.getLogger();
 
     private CustomFirefoxDriver() {
-        getLogger().info("Инициализирую Firefox Driver");
+        logger.info("Инициализирую Firefox Driver");
         System.setProperty("webdriver.gecko.driver", "bin/geckodriver-v026.exe");
         FirefoxOptions options = new FirefoxOptions();
         driver = new FirefoxDriver(options);
