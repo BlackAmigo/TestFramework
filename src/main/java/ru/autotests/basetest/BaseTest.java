@@ -24,7 +24,7 @@ public class BaseTest {
 
     @AfterSuite
     public void cleanUp() {
-        BasePage.initPage(MainPage.class).closeAllWindows();
+//        BasePage.initPage(MainPage.class).closeAllWindows();
         logger.info("\n\n");
     }
 }

@@ -21,7 +21,7 @@ public class T0002_SendMail extends BaseTest {
         steps.logIn();
     }
 
-    @Test
+    @Test()
     public void sendMail() {
         String status = steps
                 .sendEmail(recipientMailAddress, letterSubject, letterText)
@@ -30,7 +30,7 @@ public class T0002_SendMail extends BaseTest {
         steps.clickCloseInfoButton();
     }
 
-    @Test
+    @Test(dependsOnMethods = "sendMail")
     public void checkRecipientMailAddress() {
         WebElement letter = steps.clickSentMessageFolder()
                 .getLetter(1);
@@ -38,7 +38,7 @@ public class T0002_SendMail extends BaseTest {
         assertEquals(letterSender, recipientMailAddress);
     }
 
-    @Test
+    @Test(dependsOnMethods = "checkRecipientMailAddress")
     public void checkLetterSubject() {
         WebElement letter = steps.getLetter(1);
         String currentLetterSubject = steps.getLetterSubject(letter);

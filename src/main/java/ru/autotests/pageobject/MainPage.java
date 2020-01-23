@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
+import ru.autotests.steps.Steps;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,13 @@ public class MainPage extends BasePage {
 
     public MainPage clickSentMessageFolder() {
         logger.info("Кликаю по папке 'Отправленные'");
-        driver.findElementByXPath("//*[text() = 'Отправленные']").click();
+        driver.findElementByXPath("//*[@title='Отправленные']").click();
+        return this;
+    }
+
+    public MainPage clickInboxMessageFolder() {
+        logger.info("Кликаю по папке 'Входящие'");
+        driver.findElementByXPath("//*[@title='Входящие']").click();
         return this;
     }
 
@@ -41,6 +48,12 @@ public class MainPage extends BasePage {
         WebElement element = letter.findElement(By.className("ll-sp__normal"));
         logger.info("Получаю текст письма");
         return element.getText();
+    }
+
+    public MainPage clickDeleteButton(){
+        logger.info("Кликаю по кнопке 'Удалить'");
+        driver.findElementByXPath("//*[@title='Удалить']").click();
+        return this;
     }
 
     public MainPage clickLogOutButton() {
@@ -73,7 +86,7 @@ public class MainPage extends BasePage {
     }
 
     public List<WebElement> getLettersList(){
-        String xPath = "//*[@class='dataset__items']/*";
+        String xPath = "//*[@class='dataset__items']//a";
         logger.info("Получаю список писем");
         int count = 0;
         List<WebElement> list = new ArrayList<>();
@@ -88,4 +101,12 @@ public class MainPage extends BasePage {
         }
          return list;
     }
+
+    public MainPage clickLetterCheckbox (WebElement letter){
+        String xPath = ".//*[@class='ll-av__container']";
+        logger.info("Кликаю по чекбоксу");
+        letter.findElement(By.xpath(xPath)).click();
+        return this;
+    }
+
 }

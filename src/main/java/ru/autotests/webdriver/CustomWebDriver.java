@@ -86,7 +86,7 @@ public abstract class CustomWebDriver {
         logger.trace(String.format("Ищу список элементов по локатору '%s'", xpath));
         List<WebElement> elements = null;
         try {
-            elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xpath)));
+            elements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(xpath)));
         } catch (Exception e) {
             createScreenshot();
             e.printStackTrace();
@@ -97,20 +97,27 @@ public abstract class CustomWebDriver {
     public WebElement findElementByXPath(String xpath) {
         logger.trace(String.format("Ищу элемент по локатору '%s'", xpath));
         WebElement element = null;
-        try {
-            element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
-            element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+        boolean isStaleElementReferenceException = true;
 
-//        ((JavascriptExecutor)getWebDriver()).executeScript(
-//                "arguments[0].scrollIntoView(true);",element);
-
-            Actions scroll = new Actions(getWebDriver());
-            scroll.moveToElement(element).build();
-            scroll.perform();
-            element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
-        } catch (Exception e) {
-            createScreenshot();
-            e.printStackTrace();
+        while (isStaleElementReferenceException) {
+            isStaleElementReferenceException = false;
+            try {
+                element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
+                try {
+                    element = new WebDriverWait(getWebDriver(),3,500)
+                            .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+                }catch (TimeoutException te){
+                    ((JavascriptExecutor) getWebDriver()).executeScript(
+                            "arguments[0].scrollIntoView(true);", element);
+                    element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+                }
+                element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+            } catch (StaleElementReferenceException sere) {
+                isStaleElementReferenceException = true;
+            } catch (Exception e) {
+                createScreenshot();
+                e.printStackTrace();
+            }
         }
         return element;
     }

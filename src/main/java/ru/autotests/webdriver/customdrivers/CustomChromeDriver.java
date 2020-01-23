@@ -8,6 +8,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import ru.autotests.webdriver.CustomWebDriver;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CustomChromeDriver extends CustomWebDriver {
 
     private static CustomChromeDriver customChromeDriver;
@@ -18,9 +21,12 @@ public class CustomChromeDriver extends CustomWebDriver {
         logger.info("Инициализирую Chrome Driver");
         System.setProperty("webdriver.chrome.driver", "bin/chromedriver");
         ChromeOptions options = new ChromeOptions();
+//        options.AddUserProfilePreference("credentials_enable_service", false);
+//        options.AddUserProfilePreference("profile.password_manager_enabled", false);
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         driver = new ChromeDriver(options);
-        driver.manage().window().maximize();//setSize(new Dimension(800, 600));
+        driver.manage().window().setSize(new Dimension(1024, 768));
+        driver.manage().deleteAllCookies();
     }
 
     public static CustomChromeDriver getInstance() {

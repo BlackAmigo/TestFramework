@@ -7,6 +7,7 @@ import ru.autotests.pageobject.SendMailPage;
 import ru.autotests.pageobject.StartPage;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static ru.autotests.testdata.TestData.getLogin;
@@ -74,7 +75,11 @@ public class Steps {
     }
 
     public WebElement getLetter(int letterNumber) {
-        return mainPage.getLettersList().get(letterNumber);
+        return mainPage.getLettersList().get(letterNumber - 1);
+    }
+
+    public List<WebElement> getLettersList() {
+        return mainPage.getLettersList();
     }
 
     public String getLetterRecipient(WebElement letter) {
@@ -85,4 +90,19 @@ public class Steps {
         return mainPage.getLetterSubject(letter);
     }
 
+    public Steps clickLetterCheckbox (WebElement letter){
+        mainPage.clickLetterCheckbox(letter);
+        return this;
+    }
+
+
+    public Steps clickInboxMessageFolder() {
+        mainPage.clickInboxMessageFolder();
+        return this;
+    }
+
+    public Steps clickDeleteButton() {
+        mainPage.clickDeleteButton();
+        return this;
+    }
 }

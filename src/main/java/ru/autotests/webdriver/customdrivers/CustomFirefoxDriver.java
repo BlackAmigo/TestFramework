@@ -20,6 +20,7 @@ public class CustomFirefoxDriver extends CustomWebDriver {
         FirefoxOptions options = new FirefoxOptions();
         driver = new FirefoxDriver(options);
         driver.manage().window().setSize(new Dimension(800, 600));
+        driver.manage().deleteAllCookies();
     }
 
     public static CustomFirefoxDriver getInstance() {
