@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
-import ru.autotests.steps.Steps;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +28,12 @@ public class MainPage extends BasePage {
     public MainPage clickInboxMessageFolder() {
         logger.info("Кликаю по папке 'Входящие'");
         driver.findElementByXPath("//*[@title='Входящие']").click();
+        return this;
+    }
+
+    public MainPage clickDraftsFolder() {
+        logger.info("Кликаю по папке 'Черновики'");
+        driver.findElementByXPath("//*[@title='Черновики']").click();
         return this;
     }
 
@@ -81,7 +86,7 @@ public class MainPage extends BasePage {
         logger.info("Получаю сообщение об авторизации");
         String textXPath = "//*[@class='login-header']";
         String iFrameXPath = "//*[@class='ag-popup__frame__layout__iframe']";
-        driver.getWebDriver().switchTo().frame(driver.findElementByXPath(iFrameXPath));
+        driver.getCurrentWebDriver().switchTo().frame(driver.findElementByXPath(iFrameXPath));
         return driver.findElementByXPath(textXPath).getText();
     }
 

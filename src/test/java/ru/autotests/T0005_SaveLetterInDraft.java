@@ -6,34 +6,31 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import ru.autotests.basetest.BaseTest;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 import static ru.autotests.testdata.TestData.*;
+import static ru.autotests.testdata.TestData.generateLetterText;
 
-public class T0002_SendMail extends BaseTest {
+public class T0005_SaveLetterInDraft extends BaseTest {
 
     private String recipientMailAddress = getLogin() + getMailDomain();
     private String letterSubject = "Тема:" + generateRandomString(5);
     private String letterText = generateLetterText();
 
     @BeforeTest
-    public void beforeTest(){
+    public void logInMail() {
         steps.logIn();
     }
 
-    @Test()
-    public void sendMail() {
-        String status = steps
-                .createEmail(recipientMailAddress, letterSubject, letterText)
-                .clickSendMailButton()
-                .getEmailSendingStatus();
-        assertEquals(status, "отправлено");
-        steps.clickCloseInfoButton();
+    @Test
+    public void saveLetter() {
+        steps.createEmail(recipientMailAddress, letterSubject, letterText)
+                .clickSaveMailButton()
+                .clickCloseEmailFormButton();
     }
 
-    @Test(dependsOnMethods = "sendMail")
+    @Test(dependsOnMethods = "saveLetter")
     public void checkRecipientMailAddress() {
-        WebElement letter = steps.clickSentMessageFolder()
+        WebElement letter = steps.clickDraftsFolder()
                 .getLetter(1);
         String letterSender = steps.getLetterRecipient(letter);
         assertEquals(letterSender, recipientMailAddress);
@@ -47,7 +44,7 @@ public class T0002_SendMail extends BaseTest {
     }
 
     @AfterTest
-    public void afterTest(){
+    public void afterTest() {
         steps.logOut();
     }
 }

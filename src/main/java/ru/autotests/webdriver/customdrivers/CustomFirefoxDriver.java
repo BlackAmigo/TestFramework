@@ -19,7 +19,7 @@ public class CustomFirefoxDriver extends CustomWebDriver {
         System.setProperty("webdriver.gecko.driver", "bin/geckodriver-v026.exe");
         FirefoxOptions options = new FirefoxOptions();
         driver = new FirefoxDriver(options);
-        driver.manage().window().setSize(new Dimension(800, 600));
+        driver.manage().window().setSize(new Dimension(1024, 768));
         driver.manage().deleteAllCookies();
     }
 
@@ -29,7 +29,7 @@ public class CustomFirefoxDriver extends CustomWebDriver {
     }
 
     @Override
-    public WebDriver getWebDriver() {
+    public WebDriver getCurrentWebDriver() {
         return driver;
     }
 }

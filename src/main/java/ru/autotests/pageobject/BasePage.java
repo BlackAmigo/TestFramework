@@ -13,7 +13,7 @@ public abstract class BasePage {
     private static Logger logger = LogManager.getLogger();
 
     public static <Page extends BasePage> Page initPage(Class<Page> pageClass) {
-        return PageFactory.initElements(WebDriverManager.getWebDriver().getWebDriver(), pageClass);
+        return PageFactory.initElements(WebDriverManager.getWebDriver().getCurrentWebDriver(), pageClass);
     }
 
     public void open(String url) {
@@ -30,6 +30,6 @@ public abstract class BasePage {
     }
 
     public static String getCurrentUrl(){
-        return WebDriverManager.getWebDriver().getWebDriver().getCurrentUrl();
+        return WebDriverManager.getWebDriver().getCurrentWebDriver().getCurrentUrl();
     }
 }

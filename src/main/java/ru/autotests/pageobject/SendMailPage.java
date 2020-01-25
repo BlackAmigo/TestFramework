@@ -32,9 +32,16 @@ public class SendMailPage extends MainPage {
         return this;
     }
 
-    public SendMailPage clickSendButton(){
+    public SendMailPage clickSendMailButton(){
         logger.info("Кликаю по кнопке 'Отправить'");
         String sendButtonPath = "//*[@title='Отправить']";
+        driver.findElementByXPath(sendButtonPath).click();
+        return this;
+    }
+
+    public SendMailPage clickSaveMailButton(){
+        logger.info("Кликаю по кнопке 'Сохранить'");
+        String sendButtonPath = "//*[@title='Сохранить']";
         driver.findElementByXPath(sendButtonPath).click();
         return this;
     }
@@ -47,6 +54,13 @@ public class SendMailPage extends MainPage {
     public SendMailPage clickCloseInfoButton(){
         logger.info("Закрываю окно 'Письмо отправлено'");
         String closeButtonPath = "//*[@class='layer__controls']";
+        driver.findElementByXPath(closeButtonPath).click();
+        return this;
+    }
+
+    public SendMailPage clickCloseEmailFormButton(){
+        logger.info("Закрываю окно 'Письмо отправлено'");
+        String closeButtonPath = "//*[@title='Закрыть']";
         driver.findElementByXPath(closeButtonPath).click();
         return this;
     }

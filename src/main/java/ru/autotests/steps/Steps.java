@@ -6,9 +6,7 @@ import ru.autotests.pageobject.MainPage;
 import ru.autotests.pageobject.SendMailPage;
 import ru.autotests.pageobject.StartPage;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static ru.autotests.testdata.TestData.getLogin;
 import static ru.autotests.testdata.TestData.getPassword;
@@ -51,12 +49,21 @@ public class Steps {
         return mainPage.getUserEmail();
     }
 
-    public Steps sendEmail(String recipientMailAddress, String letterSubject, String letterText) {
+    public Steps createEmail(String recipientMailAddress, String letterSubject, String letterText) {
         mainPage.clickWriteLetterButton();
         sendMailPage.setMailAddress(recipientMailAddress)
                 .setLetterSubject(letterSubject)
-                .setLetterText(letterText)
-                .clickSendButton();
+                .setLetterText(letterText);
+        return this;
+    }
+
+    public Steps clickSendMailButton() {
+        sendMailPage.clickSendMailButton();
+        return this;
+    }
+
+    public Steps clickSaveMailButton() {
+        sendMailPage.clickSaveMailButton();
         return this;
     }
 
@@ -69,8 +76,18 @@ public class Steps {
         return this;
     }
 
+    public Steps clickCloseEmailFormButton() {
+        sendMailPage.clickCloseEmailFormButton();
+        return this;
+    }
+
     public Steps clickSentMessageFolder() {
         mainPage.clickSentMessageFolder();
+        return this;
+    }
+
+    public Steps clickDraftsFolder() {
+        mainPage.clickDraftsFolder();
         return this;
     }
 
