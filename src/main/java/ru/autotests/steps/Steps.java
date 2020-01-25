@@ -82,6 +82,14 @@ public class Steps {
         return mainPage.getLettersList();
     }
 
+    public List<WebElement> getLettersList(int size) {
+        List<WebElement> list = mainPage.getLettersList();
+        if (list.size() > size)
+            return list.subList(0, size);
+        else
+            return list;
+    }
+
     public String getLetterRecipient(WebElement letter) {
         return mainPage.getLetterRecipient(letter);
     }
@@ -90,7 +98,7 @@ public class Steps {
         return mainPage.getLetterSubject(letter);
     }
 
-    public Steps clickLetterCheckbox (WebElement letter){
+    public Steps clickLetterCheckbox(WebElement letter) {
         mainPage.clickLetterCheckbox(letter);
         return this;
     }

@@ -10,6 +10,7 @@ import java.util.Properties;
 public class TestData {
 
     private static Properties properties;
+    private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
     static{
         properties = new Properties();
@@ -39,5 +40,15 @@ public class TestData {
     public static String generateLetterText(){
         String dateTime = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date());
         return "Привет! Это письмо написано " + dateTime + ".";
+    }
+
+    public static String generateRandomString(int size){
+       StringBuilder result = new StringBuilder(size);
+       int alphabetSize = ALPHABET.length();
+        for (int i = 0; i < size; i++) {
+            int randomNumber = (int)(Math.random() * alphabetSize);
+            result.append(ALPHABET.charAt(randomNumber));
+        }
+        return result.toString();
     }
 }

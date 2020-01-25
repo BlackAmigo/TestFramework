@@ -13,7 +13,7 @@ import static ru.autotests.testdata.TestData.*;
 public class T0002_SendMail extends BaseTest {
 
     private String recipientMailAddress = getLogin() + getMailDomain();
-    private String letterSubject = getLetterSubject();
+    private String letterSubject = generateRandomString(5);
     private String letterText = generateLetterText();
 
     @BeforeTest

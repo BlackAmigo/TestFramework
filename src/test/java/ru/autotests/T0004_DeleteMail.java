@@ -6,7 +6,9 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import ru.autotests.basetest.BaseTest;
 
-import static org.testng.Assert.assertNotEquals;
+import java.util.List;
+
+import static org.testng.Assert.*;
 
 public class T0004_DeleteMail extends BaseTest {
 
@@ -16,26 +18,35 @@ public class T0004_DeleteMail extends BaseTest {
     }
 
     @Test
-    public void deleteMail(){
-        String letterSender = "";
-        String letterSender2 = "";
-        while (letterSender.equals(letterSender2)) {
-            WebElement letter = steps.clickInboxMessageFolder()
-                    .getLetter(1);
+    public void deleteMail() {
+        String letterSender = null;
+        String letterSubject = null;
+        String verifiableLetterSender = null;
+        String verifiableLetterSubject = null;
+        boolean isLetterExist = false;
 
-            letterSender = steps.getLetterRecipient(letter);
+        WebElement firstLetter = steps.clickInboxMessageFolder().getLetter(1);
+        letterSender = steps.getLetterRecipient(firstLetter);
+        letterSubject = steps.getLetterSubject(firstLetter);
 
-            steps.clickLetterCheckbox(letter);
-            steps.clickDeleteButton();
+        steps.clickLetterCheckbox(firstLetter).clickDeleteButton();
 
-            WebElement letter2 = steps.getLetter(1);
-            letterSender2 = steps.getLetterRecipient(letter2);
+        List<WebElement> letterList = steps.getLettersList(3);
+        for (int i = 0; i < letterList.size(); i++) {
+            WebElement letter = letterList.get(i);
+            verifiableLetterSender = steps.getLetterRecipient(letter);
+            verifiableLetterSubject = steps.getLetterSubject(letter);
+            if(letterSender.equals(verifiableLetterSender) && letterSubject.equals(verifiableLetterSubject)){
+                isLetterExist = true;
+                break;
+            }
         }
-        assertNotEquals(letterSender, letterSender2);
+
+        assertFalse(isLetterExist);
     }
 
     @AfterTest
-    public void afterTest(){
+    public void afterTest() {
         steps.logOut();
     }
 }
