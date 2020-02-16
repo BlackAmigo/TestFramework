@@ -5,19 +5,19 @@ import ru.autotests.pageobject.BasePage;
 import ru.autotests.pageobject.MainPage;
 import ru.autotests.pageobject.SendMailPage;
 import ru.autotests.pageobject.StartPage;
+import ru.autotests.testdata.TestData;
 
 import java.util.List;
-
-import static ru.autotests.testdata.TestData.getLogin;
-import static ru.autotests.testdata.TestData.getPassword;
 
 public class Steps {
 
     private StartPage startPage;
     private MainPage mainPage;
     private SendMailPage sendMailPage;
+    private TestData data;
 
     public Steps() {
+        data = TestData.getInstance();
         startPage = BasePage.initPage(StartPage.class);
         mainPage = BasePage.initPage(MainPage.class);
         sendMailPage = BasePage.initPage(SendMailPage.class);
@@ -25,9 +25,9 @@ public class Steps {
 
     public Steps logIn() {
         startPage.open()
-                .setLoginField(getLogin())
+                .setLoginField(data.getLogin())
                 .clickSubmitButton()
-                .setPasswordField(getPassword())
+                .setPasswordField(data.getPassword())
                 .clickSubmitButton();
         return this;
     }

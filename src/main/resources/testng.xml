@@ -1,4 +1,4 @@
-<suite name="Suite1" verbose="1" parallel="classes" threadCount="0">
+<suite name="Suite1" verbose="1" parallel="classes" threadCount="1">
     <test name="Test1">
         <classes>
             <class name="ru.autotests.T0001_LogInMail"/>
@@ -12,6 +12,16 @@
     <test name="Test3">
         <classes>
             <class name="ru.autotests.T0003_LogOutMail"/>
+        </classes>
+    </test>
+    <test name="Test4">
+        <classes>
+            <class name="ru.autotests.T0004_DeleteMail"/>
+        </classes>
+    </test>
+    <test name="Test3">
+        <classes>
+            <class name="ru.autotests.T0005_SaveLetterInDraft"/>
         </classes>
     </test>
 </suite>

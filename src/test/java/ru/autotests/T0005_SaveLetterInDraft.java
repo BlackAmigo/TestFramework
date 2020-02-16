@@ -7,14 +7,12 @@ import org.testng.annotations.Test;
 import ru.autotests.basetest.BaseTest;
 
 import static org.testng.Assert.*;
-import static ru.autotests.testdata.TestData.*;
-import static ru.autotests.testdata.TestData.generateLetterText;
 
 public class T0005_SaveLetterInDraft extends BaseTest {
 
-    private String recipientMailAddress = getLogin() + getMailDomain();
-    private String letterSubject = "Тема:" + generateRandomString(5);
-    private String letterText = generateLetterText();
+    private String recipientMailAddress = data.getLogin() + data.getMailDomain();
+    private String letterSubject = "Тема:" + data.generateRandomString(5);
+    private String letterText = data.generateLetterText();
 
     @BeforeTest
     public void logInMail() {
