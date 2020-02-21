@@ -8,7 +8,7 @@ import ru.autotests.pageobject.BasePage;
 import ru.autotests.pageobject.MainPage;
 import ru.autotests.steps.Steps;
 import ru.autotests.testdata.TestData;
-import ru.autotests.webdriver.WebDriverManager;
+import ru.autotests.webdriver.CustomWebDriver;
 
 public class BaseTest {
 
@@ -22,13 +22,13 @@ public class BaseTest {
 
     @BeforeSuite
     public void tearDown() {
-        WebDriverManager.setupWebDriver(data.getWebDriver());
+        CustomWebDriver.getInstance();
         steps = new Steps();
     }
 
     @AfterSuite
     public void cleanUp() {
         BasePage.initPage(MainPage.class).closeAllWindows();
-        logger.info("\n\n");
+        logger.info("Test end\n\n");
     }
 }

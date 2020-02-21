@@ -10,7 +10,7 @@ public class SendMailPage extends MainPage {
 
     public SendMailPage setMailAddress(String mailAddress) {
         String mailAddressField = "//*[@class='input--3slxg']//input";
-        WebElement searchField = driver.findElementByXPath(mailAddressField);
+        WebElement searchField = customWebDriver.findElementByXPath(mailAddressField);
         logger.info(String.format("Пишу адрес получателя письма: '%s'", mailAddress));
         searchField.sendKeys(mailAddress);
         return this;
@@ -18,7 +18,7 @@ public class SendMailPage extends MainPage {
 
     public SendMailPage setLetterSubject(String letterSubject) {
         String letterSubjectField = "//*[@class='container--3QXHv']//input";
-        WebElement searchField = driver.findElementByXPath(letterSubjectField);
+        WebElement searchField = customWebDriver.findElementByXPath(letterSubjectField);
         logger.info(String.format("Пишу тему письма: '%s'", letterSubject));
         searchField.sendKeys(letterSubject);
         return this;
@@ -26,7 +26,7 @@ public class SendMailPage extends MainPage {
 
     public SendMailPage setLetterText(String letterText) {
         String letterTextAreaPath = "//*[contains(@class, 'editable-container')]/div/div";
-        WebElement searchField = driver.findElementByXPath(letterTextAreaPath);
+        WebElement searchField = customWebDriver.findElementByXPath(letterTextAreaPath);
         logger.info(String.format("Пишу текст письма: '%s'", letterText));
         searchField.sendKeys(letterText);
         return this;
@@ -35,14 +35,14 @@ public class SendMailPage extends MainPage {
     public SendMailPage clickSendMailButton(){
         logger.info("Кликаю по кнопке 'Отправить'");
         String sendButtonPath = "//*[@title='Отправить']";
-        driver.findElementByXPath(sendButtonPath).click();
+        customWebDriver.findElementByXPath(sendButtonPath).click();
         return this;
     }
 
     public SendMailPage clickSaveMailButton(){
         logger.info("Кликаю по кнопке 'Сохранить'");
         String sendButtonPath = "//*[@title='Сохранить']";
-        driver.findElementByXPath(sendButtonPath).click();
+        customWebDriver.findElementByXPath(sendButtonPath).click();
         return this;
     }
 
@@ -54,14 +54,14 @@ public class SendMailPage extends MainPage {
     public SendMailPage clickCloseInfoButton(){
         logger.info("Закрываю окно 'Письмо отправлено'");
         String closeButtonPath = "//*[@class='layer__controls']";
-        driver.findElementByXPath(closeButtonPath).click();
+        customWebDriver.findElementByXPath(closeButtonPath).click();
         return this;
     }
 
     public SendMailPage clickCloseEmailFormButton(){
         logger.info("Закрываю окно 'Письмо отправлено'");
         String closeButtonPath = "//*[@title='Закрыть']";
-        driver.findElementByXPath(closeButtonPath).click();
+        customWebDriver.findElementByXPath(closeButtonPath).click();
         return this;
     }
 }

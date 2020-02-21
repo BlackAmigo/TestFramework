@@ -6,43 +6,75 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.autotests.CustomProperty;
+import ru.autotests.webdriver.customdrivers.CustomChromeDriver;
+import ru.autotests.webdriver.customdrivers.CustomFirefoxDriver;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-public abstract class CustomWebDriver {
+public class CustomWebDriver {
 
     private static Logger logger = LogManager.getLogger();
     protected WebDriverWait wait;
+    private static WebDriver webDriver;
+    
+    private static CustomWebDriver customWebDriver;
 
-    public abstract WebDriver getCurrentWebDriver();
-
-    public void setWebDriverWait(long timeOutInSeconds, long sleepInMillis) {
-        wait = new WebDriverWait(getCurrentWebDriver(), timeOutInSeconds, sleepInMillis);
+    private CustomWebDriver() {
+        setupWebDriver();
+        Properties properties = CustomProperty.getInstance().getProperties();
+        int timeOutInSeconds = Integer.parseInt(properties.getProperty("webdriver.webdriverwait.timeoutsec"));
+        int sleepMillis = Integer.parseInt(properties.getProperty("webdriver.webdriverwait.sleepmillis"));
+        int implicitlyWaitSec = Integer.parseInt(properties.getProperty("webdriver.implicitlywaitsec"));
+        wait = new WebDriverWait(webDriver, timeOutInSeconds, sleepMillis);
+        webDriver.manage().timeouts().implicitlyWait(implicitlyWaitSec, TimeUnit.SECONDS);
     }
 
-    public void setImplicitlyWait(long timeOutInSeconds) {
-        getCurrentWebDriver().manage().timeouts().implicitlyWait(timeOutInSeconds, TimeUnit.SECONDS);
+    public static CustomWebDriver getInstance(){
+        if(customWebDriver == null)
+            customWebDriver = new CustomWebDriver();
+        return customWebDriver;
+    }
+
+    public WebDriver getDriver() {
+        return webDriver;
+    }
+
+    private void setupWebDriver() {
+        switch (CustomProperty.getInstance().getDriverType()) {
+            case "chrome":
+                webDriver = CustomChromeDriver.getInstance().getDriver();
+                break;
+
+            case "firefox":
+                webDriver = CustomFirefoxDriver.getInstance().getDriver();
+                break;
+
+            default:
+                break;
+        }
     }
 
     public void get(String url) {
         logger.trace(String.format("Открываю сайт по адресу '%s'", url));
-        getCurrentWebDriver().get(url);
+        webDriver.get(url);
     }
 
     public void close() {
         logger.trace("Закрываю последнее открытое окно");
-        getCurrentWebDriver().close();
+        webDriver.close();
     }
 
     public void closeAllWindows() {
         logger.trace("Закрываю все окна");
-        getCurrentWebDriver().quit();
+        webDriver.quit();
     }
 
     public WebElement waitForClickable(WebElement element) {
@@ -51,24 +83,24 @@ public abstract class CustomWebDriver {
     }
 
     public void switchFocusToPage(String newUrl) {
-        String oldUrl = getCurrentWebDriver().getCurrentUrl();
+        String oldUrl = webDriver.getCurrentUrl();
         if (!oldUrl.equals(newUrl)) {
             logger.trace(String.format("Меняю фокус драйвера на '%s'", newUrl));
             // текущий дескриптор
-            String oldDescriptor = getCurrentWebDriver().getWindowHandle();
-            Set<String> windowsList = getCurrentWebDriver().getWindowHandles();
+            String oldDescriptor = webDriver.getWindowHandle();
+            Set<String> windowsList = webDriver.getWindowHandles();
             for (String windowHandle : windowsList) {
                 // меняем дескриптор
-                getCurrentWebDriver().switchTo().window(windowHandle);
-                String newDescriptor = getCurrentWebDriver().getWindowHandle();
+                webDriver.switchTo().window(windowHandle);
+                String newDescriptor = webDriver.getWindowHandle();
                 // текущий URL
-                String currentUrl = getCurrentWebDriver().getCurrentUrl();
+                String currentUrl = webDriver.getCurrentUrl();
                 // если дескриптор поменялся и URL дескриптора соответствует запросу
                 if ((!oldDescriptor.equals(newDescriptor)) && currentUrl.equals(newUrl)) {
                     break;
                 }
             }
-            if (getCurrentWebDriver().getCurrentUrl().equals(newUrl))
+            if (webDriver.getCurrentUrl().equals(newUrl))
                 logger.trace(String.format("Фокус драйвера изменился на '%s'", newUrl));
             else {
                 logger.trace("Фокус драйвера НЕ изменился!");
@@ -103,10 +135,10 @@ public abstract class CustomWebDriver {
             try {
                 element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
                 try {
-                    element = new WebDriverWait(getCurrentWebDriver(),3,500)
+                    element = new WebDriverWait(webDriver,3,500)
                             .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
                 }catch (TimeoutException te){
-                    ((JavascriptExecutor) getCurrentWebDriver()).executeScript(
+                    ((JavascriptExecutor) webDriver).executeScript(
                             "arguments[0].scrollIntoView(true);", element);
                     element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
                 }
@@ -123,7 +155,7 @@ public abstract class CustomWebDriver {
 
     private void createScreenshot() {
         logger.trace("Создаю скриншот ошибки");
-        File file = ((TakesScreenshot) getCurrentWebDriver()).getScreenshotAs(OutputType.FILE);
+        File file = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
         try {
             String fileName = String.format("target/generated-test-sources/test-reports/screenshots/%s-scr.jpg",
                     new SimpleDateFormat("dd.MM_HH-mm-ss").format(new Date()));
@@ -133,3 +165,4 @@ public abstract class CustomWebDriver {
         }
     }
 }
+

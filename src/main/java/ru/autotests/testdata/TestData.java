@@ -1,7 +1,7 @@
 package ru.autotests.testdata;
 
-import java.io.IOException;
-import java.io.InputStream;
+import ru.autotests.CustomProperty;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
@@ -13,7 +13,7 @@ public class TestData {
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
     private TestData() {
-       loadProp();
+        properties = CustomProperty.getInstance().getProperties();
     }
 
     public static TestData getInstance(){
@@ -32,10 +32,6 @@ public class TestData {
 
     public String getPassword() {
         return properties.getProperty("mailru.password");
-    }
-
-    public String getWebDriver() {
-        return properties.getProperty("webdriver");
     }
 
     public String getLetterSubject(){
@@ -57,12 +53,4 @@ public class TestData {
         return result.toString();
     }
 
-    private void loadProp(){
-        properties = new Properties();
-        try (InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("config.properties")) {
-            properties.load(resourceAsStream);
-        } catch (IOException e) {
-            e.getStackTrace();
-        }
-    }
 }

@@ -15,25 +15,25 @@ public class MainPage extends BasePage {
 
     public MainPage clickWriteLetterButton() {
         logger.info("Кликаю по кнопке 'Написать письмо'");
-        driver.findElementByXPath("//*[@class='compose-button__wrapper']").click();
+        customWebDriver.findElementByXPath("//*[@class='compose-button__wrapper']").click();
         return this;
     }
 
     public MainPage clickSentMessageFolder() {
         logger.info("Кликаю по папке 'Отправленные'");
-        driver.findElementByXPath("//*[@title='Отправленные']").click();
+        customWebDriver.findElementByXPath("//*[@title='Отправленные']").click();
         return this;
     }
 
     public MainPage clickInboxMessageFolder() {
         logger.info("Кликаю по папке 'Входящие'");
-        driver.findElementByXPath("//*[@title='Входящие']").click();
+        customWebDriver.findElementByXPath("//*[@title='Входящие']").click();
         return this;
     }
 
     public MainPage clickDraftsFolder() {
         logger.info("Кликаю по папке 'Черновики'");
-        driver.findElementByXPath("//*[@title='Черновики']").click();
+        customWebDriver.findElementByXPath("//*[@title='Черновики']").click();
         return this;
     }
 
@@ -57,28 +57,28 @@ public class MainPage extends BasePage {
 
     public MainPage clickDeleteButton(){
         logger.info("Кликаю по кнопке 'Удалить'");
-        driver.findElementByXPath("//*[@title='Удалить']").click();
+        customWebDriver.findElementByXPath("//*[@title='Удалить']").click();
         return this;
     }
 
     public MainPage clickLogOutButton() {
         String xPath = "//*[@id='PH_logoutLink']";
         logger.info("Кликаю по кнопке 'Выход'");
-        driver.findElementByXPath(xPath).click();
+        customWebDriver.findElementByXPath(xPath).click();
         return this;
     }
 
     public String getUserEmail() {
         logger.info("Получаю адрес почты текущего пользователя");
         String xPath = "//*[@id='PH_user-email']";
-        WebElement element = driver.findElementByXPath(xPath);
+        WebElement element = customWebDriver.findElementByXPath(xPath);
         return element.getText();
     }
 
     public String getAuthLink() {
         logger.info("Получаю текст элемента авторизации");
         String xPath = "//*[@id='PH_authLink']";
-        WebElement element = driver.findElementByXPath(xPath);
+        WebElement element = customWebDriver.findElementByXPath(xPath);
         return element.getText();
     }
 
@@ -86,8 +86,8 @@ public class MainPage extends BasePage {
         logger.info("Получаю сообщение об авторизации");
         String textXPath = "//*[@class='login-header']";
         String iFrameXPath = "//*[@class='ag-popup__frame__layout__iframe']";
-        driver.getCurrentWebDriver().switchTo().frame(driver.findElementByXPath(iFrameXPath));
-        return driver.findElementByXPath(textXPath).getText();
+        customWebDriver.getDriver().switchTo().frame(customWebDriver.findElementByXPath(iFrameXPath));
+        return customWebDriver.findElementByXPath(textXPath).getText();
     }
 
     public List<WebElement> getLettersList(){
@@ -98,7 +98,7 @@ public class MainPage extends BasePage {
         while (count < 5) {
             list.clear();
             try {
-            list = driver.findElementsByXPath(xPath);
+            list = customWebDriver.findElementsByXPath(xPath);
             } catch (StaleElementReferenceException e) {
                 logger.error("StaleElementReferenceException thrown " + ++count + " times");
             }

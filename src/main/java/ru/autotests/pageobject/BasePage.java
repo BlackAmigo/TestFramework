@@ -5,31 +5,30 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import ru.autotests.webdriver.CustomWebDriver;
-import ru.autotests.webdriver.WebDriverManager;
 
 public abstract class BasePage {
 
-    protected CustomWebDriver driver = WebDriverManager.getWebDriver();
+    protected CustomWebDriver customWebDriver = CustomWebDriver.getInstance();
     private static Logger logger = LogManager.getLogger();
 
     public static <Page extends BasePage> Page initPage(Class<Page> pageClass) {
-        return PageFactory.initElements(WebDriverManager.getWebDriver().getCurrentWebDriver(), pageClass);
+        return PageFactory.initElements(CustomWebDriver.getInstance().getDriver(), pageClass);
     }
 
     public void open(String url) {
-        driver.get(url);
+        customWebDriver.get(url);
     }
 
     public void closeAllWindows() {
-        driver.closeAllWindows();
+        customWebDriver.closeAllWindows();
     }
 
     public String getText(String xPath) {
-        WebElement element = driver.findElementByXPath(xPath);
+        WebElement element = customWebDriver.findElementByXPath(xPath);
         return element.getText();
     }
 
     public static String getCurrentUrl(){
-        return WebDriverManager.getWebDriver().getCurrentWebDriver().getCurrentUrl();
+        return CustomWebDriver.getInstance().getDriver().getCurrentUrl();
     }
 }

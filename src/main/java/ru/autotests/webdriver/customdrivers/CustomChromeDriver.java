@@ -3,19 +3,17 @@ package ru.autotests.webdriver.customdrivers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import ru.autotests.webdriver.CustomWebDriver;
+import ru.autotests.CustomProperty;
+import java.util.Properties;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class CustomChromeDriver extends CustomWebDriver {
+public class CustomChromeDriver {
 
     private static CustomChromeDriver customChromeDriver;
     private ChromeDriver driver;
     private static Logger logger = LogManager.getLogger();
+    private Properties property = CustomProperty.getInstance().getProperties();
 
     private CustomChromeDriver() {
         logger.info("Инициализирую Chrome Driver");
@@ -23,7 +21,9 @@ public class CustomChromeDriver extends CustomWebDriver {
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         driver = new ChromeDriver(options);
-        driver.manage().window().setSize(new Dimension(1024, 768));
+        int width = Integer.parseInt(property.getProperty("webdriver.screensize.width"));
+        int height = Integer.parseInt(property.getProperty("webdriver.screensize.height"));
+        driver.manage().window().setSize(new Dimension(width, height));
         driver.manage().deleteAllCookies();
     }
 
@@ -32,8 +32,7 @@ public class CustomChromeDriver extends CustomWebDriver {
         return customChromeDriver;
     }
 
-    @Override
-    public WebDriver getCurrentWebDriver() {
+    public ChromeDriver getDriver() {
         return driver;
     }
 }

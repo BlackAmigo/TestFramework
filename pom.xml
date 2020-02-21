@@ -36,6 +36,13 @@
             <version>1.2.5</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.6.0</version>
+            <scope>test</scope>
+        </dependency>
+
         <!--    FileUtils.copyFile     -->
         <dependency>
             <groupId>commons-io</groupId>
@@ -86,13 +93,10 @@
                </plugin>
            </plugins>
 
-
-
            <filters>
                <filter>src/main/resources/profiles/config.${env}.properties</filter>
            </filters>
 
-           <!-- Map ${} into resources -->
            <resources>
                <resource>
                    <directory>src/main/resources</directory>
