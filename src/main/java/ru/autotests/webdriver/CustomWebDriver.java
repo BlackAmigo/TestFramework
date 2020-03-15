@@ -48,7 +48,7 @@ public class CustomWebDriver {
     }
 
     private void setupWebDriver() {
-        switch (CustomProperty.getInstance().getDriverType()) {
+        switch (System.getProperty("browser")) {
             case "chrome":
                 webDriver = CustomChromeDriver.getInstance().getDriver();
                 break;

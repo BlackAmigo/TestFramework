@@ -1,5 +1,6 @@
 package ru.autotests.cucumber;
 
+import cucumber.api.java.After;
 import cucumber.api.java.ru.Допустим;
 import cucumber.api.java.ru.Если;
 import cucumber.api.java.ru.То;
@@ -10,6 +11,7 @@ import ru.autotests.pageobject.MainPage;
 import ru.autotests.pageobject.SendMailPage;
 import ru.autotests.pageobject.StartPage;
 import ru.autotests.testdata.TestData;
+import ru.autotests.webdriver.CustomWebDriver;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -115,5 +117,6 @@ public class StepDefinition {
     public void messageEnterToAccountAppeared() {
         String loginHeaderText = mainPage.getAuthLink();
         assertEquals(loginHeaderText, "Вход");
+        CustomWebDriver.getInstance().closeAllWindows();
     }
 }

@@ -12,7 +12,7 @@ public class CustomProperty {
 
     private CustomProperty() {
         loadProp();
-        driverType = properties.getProperty("webdriver.type");
+        driverType = System.getProperty("driver");
     }
 
     public static CustomProperty getInstance(){
