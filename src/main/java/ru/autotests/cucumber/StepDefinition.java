@@ -1,6 +1,5 @@
 package ru.autotests.cucumber;
 
-import cucumber.api.java.After;
 import cucumber.api.java.ru.Допустим;
 import cucumber.api.java.ru.Если;
 import cucumber.api.java.ru.То;

@@ -38,7 +38,7 @@ public class MainPage extends BasePage {
     }
 
     public String getLetterRecipient(WebElement letter) {
-        WebElement element = letter.findElement(By.xpath("//*[@class='ll-crpt']"));
+        WebElement element = letter.findElement(By.xpath("//*[@id='PH_user-email']"));
         logger.info("Получаю адрес получателя");
         return element.getText();
     }
